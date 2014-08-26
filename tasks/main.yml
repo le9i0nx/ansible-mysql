@@ -1,0 +1,58 @@
+---
+
+- name: Check if MySQL server is installed
+  stat: path=/usr/bin/mysqld_safe
+  register: mysql_installed
+
+- name: Install MySQL-related packages
+  apt: pkg={{ item }} state=latest install_recommends=no
+  register: mysql_install_status
+  with_items: [ 'python-mysqldb', 'mysql-server', 'automysqlbackup' ]
+
+- name: Apply /etc/mysql/conf.d/mysqld.cnf configuration
+  template: src=etc/mysql/conf.d/mysqld.cnf.j2 dest=/etc/mysql/conf.d/mysqld.cnf owner=root group=root mode=0644
+  notify:
+    - Reload mysql
+
+- name: Apply /etc/mysql/conf.d/client.cnf configuration
+  template: src=etc/mysql/conf.d/client.cnf.j2 dest=/etc/mysql/conf.d/client.cnf owner=root group=root mode=0644
+  notify:
+    - Reload mysql
+
+- name: Restart MySQL service on first install
+  service: name=mysql state=restarted
+  when: (mysql_installed is defined and mysql_installed.stat.exists == False) and
+        (mysql_install_status is defined and mysql_install_status.changed == True)
+
+- name: Update mysql root password for all root accounts
+  mysql_user: name=root host={{ item }} password={{ mysql_root_password }}
+  with_items: [ '{{ ansible_hostname }}', '127.0.0.1', '::1', 'localhost' ]
+
+- name: Create /root/.my.cnf file with root password credentials
+  template: src=root/my.cnf.j2 dest=/root/.my.cnf owner=root group=root mode=0600
+
+- name: Delete anonymous mysql user
+  mysql_user: user="" host={{ item }} state=absent
+  with_items: [ '{{ ansible_hostname }}', 'localhost' ]
+
+- name: Remove test database
+  mysql_db: db=test state=absent
+
+- name: Setup automysqlbackup configuration
+  template: src=etc/default/automysqlbackup.j2 dest=/etc/default/automysqlbackup owner=root group=root mode=0644
+
+- name: Manage MySQL databases
+  mysql_db: name={{ item.name }} state={{ item.state | default('present') }}
+  with_items: mysql_databases
+  when: item.name is defined and item.name
+
+- name: Manage MySQL users
+  mysql_user:
+    name: '{{ item.name }}'
+    password: '{{ item.password | default(lookup("password", secret + "/credentials/" + ansible_fqdn + "/mysql/" + item.name + "/password length=" + mysql_password_length)) }}'
+    state: '{{ item.state | default("present") }}'
+    priv: '{{ item.priv | default(item.name + ".*:ALL") }}'
+    append_privs: '{{ item.append_privs | default("no") }}'
+  with_items: mysql_users
+  when: (item.name is defined and item.name)
+
