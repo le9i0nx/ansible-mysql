@@ -47,7 +47,7 @@ galaxy_info:
 meta_info:
   github_url: "https://github.com/debops/ansible-mysql"
   git_branch: "master"
-  galaxy_id: ""
+  galaxy_id: "1577"
 
   travis: False
 
