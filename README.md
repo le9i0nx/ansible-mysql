@@ -1,6 +1,6 @@
 ## mysql
 
-[![Travis CI](https://secure.travis-ci.org/debops/ansible-mysql.png)](http://travis-ci.org/debops/ansible-mysql) [![test-suite](http://img.shields.io/badge/test--suite-ansible--mysql-blue.svg)](https://github.com/debops/test-suite/tree/master/ansible-mysql/) [![Ansible Galaxy](http://img.shields.io/badge/galaxy-debops.mysql-660198.svg)](https://galaxy.ansible.com/list#/roles/1577)[![Platforms](http://img.shields.io/badge/platforms-debian%20|%20ubuntu-lightgrey.svg)](#)
+[![Travis CI](https://secure.travis-ci.org/debops/ansible-mysql.png)](http://travis-ci.org/debops/ansible-mysql) [![test-suite](http://img.shields.io/badge/test--suite-ansible--mysql-blue.svg)](https://github.com/debops/test-suite/tree/master/ansible-mysql/) [![Ansible Galaxy](http://img.shields.io/badge/galaxy-debops.mysql-660198.svg)](https://galaxy.ansible.com/list#/roles/1577) [![Platforms](http://img.shields.io/badge/platforms-debian%20|%20ubuntu-lightgrey.svg)](#)
 
 Install and manage a MySQL database. At the moment only database on
 `localhost` is supported.
