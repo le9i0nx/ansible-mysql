@@ -53,6 +53,7 @@
     state: '{{ item.state | default("present") }}'
     priv: '{{ item.priv | default(item.name + ".*:ALL") }}'
     append_privs: '{{ item.append_privs | default("no") }}'
+    host: '{{ item.host | default("localost") }}'
   with_items: mysql_users
   when: (item.name is defined and item.name)
 
