@@ -62,7 +62,7 @@ ansigenome_info:
 
   synopsis: |
     Install and manage a MySQL database. At the moment only database on
-    `localhost` is supported.
+    ``localhost`` is supported.
     
     You can use this role as a dependency of another role to easily create
     databases and users for a particular application (database and user
