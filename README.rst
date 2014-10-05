@@ -48,7 +48,10 @@ into your playbook.
 Role dependencies
 ~~~~~~~~~~~~~~~~~
 
-- ``debops.ferm``- ``debops.secret``- ``debops.tcpwrappers``
+- ``debops.ferm``
+- ``debops.secret``
+- ``debops.tcpwrappers``
+
 
 Role variables
 ~~~~~~~~~~~~~~
