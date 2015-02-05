@@ -19,6 +19,14 @@
   register: mysql_install_status
   with_items: [ 'python-mysqldb', 'mysql-server', 'automysqlbackup' ]
 
+- name: Add MySQL system user to specified groups
+  user:
+    name: 'mysql'
+    groups: '{{ mysql_mysqld_append_groups | join(",") | default(omit) }}'
+    append: True
+  when: mysql_pki is defined and mysql_pki
+  notify: [ 'Restart mysql' ]
+
 - name: Apply /etc/mysql/conf.d/mysqld.cnf configuration
   template:
     src: 'etc/mysql/conf.d/mysqld.cnf.j2'
