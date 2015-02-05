@@ -25,6 +25,32 @@ mysql_mysqld_options: {}
 #  'key_buffer': '16M'
 #  'skip-name-resolve':
 
+# List of additional system groups to append to the MySQL system user
+# 'ssl-cert' group is required for access to certificate private keys
+mysql_mysqld_append_groups: [ 'ssl-cert' ]
+
+
+# ---- Encrypted connections ----
+
+# Enable or disable support for TLS in MySQL (using debops.pki)
+mysql_pki: True
+
+# Base path for PKI directory
+mysql_pki_path: '{% if (ansible_local is defined and ansible_local.pki is defined) %}{{ ansible_local.pki.base_path }}{% else %}/etc/pki{% endif %}'
+
+# Default PKI realm used by MySQL (Debian MySQL packages do not support chained
+# certificates, see Debian Bug #630625)
+mysql_pki_realm: 'service'
+
+# Default CA, certificate and private key used by MySQL, relative to
+# 'mysql_pki_realm' variable
+mysql_pki_ca: 'CA.crt'
+mysql_pki_crt: 'default.crt'
+mysql_pki_key: 'default.key'
+
+# Cipher suite used for encrypted connections
+mysql_pki_cipher: 'DHE-RSA-AES256-SHA'
+
 
 # ---- PHPMyAdmin support ----
 
