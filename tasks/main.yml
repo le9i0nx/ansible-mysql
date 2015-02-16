@@ -24,6 +24,7 @@
     name: 'mysql'
     groups: '{{ mysql_mysqld_append_groups | join(",") | default(omit) }}'
     append: True
+    createhome: False
   when: mysql_pki is defined and mysql_pki
   notify: [ 'Restart mysql' ]
 
