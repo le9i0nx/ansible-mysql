@@ -10,3 +10,5 @@ v0.1.0
 
 - Change default MySQL client prompt to be more verbose. [drybjed]
 
+- Remove client prompt, it's in the wrong section. [drybjed]
+

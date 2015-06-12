@@ -59,12 +59,6 @@ mysql_pki_cipher: 'DHE-RSA-AES256-SHA'
 mysql_phpmyadmin: False
 
 
-# ---- MySQL client configuration ----
-
-# Make client prompt more verbose
-mysql_client_prompt: '\\U\ [\\d]>\_'
-
-
 # ---- automysqlbackup configuration ----
 
 # Mail address to send messages to (account or alias name will be properly
