@@ -12,3 +12,4 @@ v0.1.0
 
 - Remove client prompt, it's in the wrong section. [drybjed]
 
+- Enable pre/post main hooks [ganto]
