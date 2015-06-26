@@ -1,5 +1,8 @@
 ---
 
+- name: DebOps pre_tasks hook
+  include: "{{ lookup('task_src', 'mysql/pre_main.yml') }}"
+
 # ---- Install and configure MySQL server ----
 
   # We want to have our configuration enabled as soon as possible for UTF-8
@@ -130,3 +133,5 @@
   with_items: mysql_users
   when: (item.name is defined and item.name)
 
+- name: DebOps post_tasks hook
+  include: "{{ lookup('task_src', 'mysql/post_main.yml') }}"
