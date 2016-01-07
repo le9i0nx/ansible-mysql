@@ -2,25 +2,25 @@
 
 # ---- MySQL server configuration ----
 
-# Bind address of mysqld. If you want to allow access to the server over the
+# Bind address of :program:`mysqld`. If you want to allow access to the server over the
 # network, change this to '0.0.0.0' (for all interfaces) or for specific IP
-# address to bind on
+# address to bind on.
 mysql_mysqld_bind_address: 'localhost'
 
-# Default mysqld port to listen on
+# Default :program:`mysqld` port to listen on.
 mysql_mysqld_port: 3306
 
 # This is a list of IP addresses or CIDR networks allowed to connect to MySQL
-# server from remote hosts. It will be applied in firewall (ferm) and
-# /etc/hosts.allow (tcpwrappers).
-# You will need to set mysql_mysqld_bind_address to 0.0.0.0 and restart MySQL
+# server from remote hosts. It will be enforced by the firewall (ferm) and
+# :file:`/etc/hosts.allow` (tcpwrappers).
+# You will need to set ``mysql_mysqld_bind_address`` to 0.0.0.0 and restart MySQL
 # server for it to listen on all network interfaces.
 mysql_mysqld_allow: []
 
 # Maximum number of allowed connections
 mysql_mysqld_max_connections: 100
 
-# Use this hash variable to set additional mysqld options
+# Use this hash variable to set additional :program:`mysqld` options.
 mysql_mysqld_options: {}
 #  'key_buffer': '16M'
 #  'skip-name-resolve':
@@ -32,7 +32,7 @@ mysql_mysqld_append_groups: [ 'ssl-cert' ]
 
 # ---- Encrypted connections ----
 
-# Enable or disable support for TLS in MySQL (using debops.pki)
+# Enable or disable support for TLS in MySQL (using ``debops.pki``).
 mysql_pki: True
 
 # Base path for PKI directory
