@@ -13,3 +13,5 @@ v0.1.0
 - Remove client prompt, it's in the wrong section. [drybjed]
 
 - Enable pre/post main hooks [ganto]
+
+- The role has been deprecated. Consider to use ``debops.mariadb_server``. [ypid]
